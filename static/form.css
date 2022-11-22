@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+
+body{
+  background-color: black;
+  background-image: url('./image/bg3.jpg');
+  
+  background-size:auto;
+}
+#text{
+  color: black;
+}
+.center-box{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 40px;
+  width:300px;
+  height:320px;
+  text-align: center;
+  color:rgb(0, 0, 0);
+}
+.text-field{
+  font-family: 'Sono', sans-serif;
+  padding: 10px 30px;
+  margin: 20px 0;
+  border: 2px solid white;
+  border-radius: 10px;
+  font-size: 11pt;
+  color:green;
+}
+.btn-style{
+  padding: 10px 30px;
+  border:1px solid rgb(218, 97, 27);
+  border-radius: 20px;
+  background-color: white;
+  color:rgb(0, 0, 0);
+}
+.btn-style:hover{
+  
+  background-color: rgb(218, 97, 27);
+  color:white;
+}
+.an-btn{
+  margin-top: 10px;
+  border: 0;
+  background-color: rgb(218, 97, 27);
+  color:rgb(0, 0, 0);
+  font-size: 13pt;
+}
+#register-div{
+  display:none;
+}
+#result-box{
+  display:none;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  font-size: 16pt;
+  color: white;
+}
+.center-box, #login-div, #register-div{
+  background-color: rgb(201, 191, 191);
+}
