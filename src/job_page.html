@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>FasTrucks Admin Panel</title>
+    <title>FasTrucks Jobs</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
 
@@ -81,7 +81,7 @@
 <body>
 
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">FasTrucks</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">FasTrucks Jobs </a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -92,7 +92,7 @@
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 <a href="form.html"><button class="nav-link px-3" style="color:black" onclick="logout()">Sign
-                    out</button></a>
+                        out</button></a>
             </div>
         </div>
     </header>
@@ -103,19 +103,19 @@
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="admin_page.html">
+                            <a class="nav-link " aria-current="page" href="../src/admin_page.html">
                                 <span data-feather="home" class="align-text-bottom"></span>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="transporters_page.html">
+                            <a class="nav-link " href="transporters_page.html">
                                 <span data-feather="file" class="align-text-bottom"></span>
-                                Transporters 
+                                Transporters
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="suppliers_page.html">
+                            <a class="nav-link " href="suppliers_page.html">
                                 <span data-feather="shopping-cart" class="align-text-bottom"></span>
                                 Suppliers
                             </a>
@@ -123,19 +123,18 @@
                         <li class="nav-item">
                             <a class="nav-link" href="uploads_page.html">
                                 <span data-feather="users" class="align-text-bottom"></span>
-                                User Verification
+                                Uploads
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="job_page.html">
+                            <a class="nav-link active" href="job_page.html">
                                 <span data-feather="users" class="align-text-bottom"></span>
                                 Jobs
                             </a>
                         </li>
                         
-                        
-                    </ul>
 
+                    </ul>
                     <h6
                         class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
                         <span>Reports</span>
@@ -155,50 +154,35 @@
             </nav>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="row mt-5" >
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../static/image/supplierbg.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                              <h5 class="card-title">Suppliers</h5>
-                              <p class="card-text"></p>
-                              <a href="suppliers_page.html" class="btn btn-outline-dark">View Supplier information</a>
-                            </div>
-                          </div>
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h5 style="text-align: center">ALL JOBS</h5>
+                            <table class="table table-striped table-hover ">
+                                <thead class = table-dark>
+                                    <tr>
+                                        <th class="row-cols-sm-2">ID</th>
+                                        <th class="row-cols-sm-2">Supplier Name</th>
+                                        <th class="row-cols-sm-2">Goods Type</th>
+                                        <th class="row-cols-sm-2">Goods Source</th>
+                                        <th class="row-cols-sm-2">Goods Destination</th>
+                                        <th class="row-cols-sm-2">Date</th>
+                                        <th class="row-cols-sm-2">Transporter Name</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody2">
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                      <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../static/image/transporter.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                              <h5 class="card-title">Transporters</h5>
-                              <p class="card-text"></p>
-                              <a href="transporters_page.html" class="btn btn-outline-dark">View Transporter information</a>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../static/image/job.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                              <h5 class="card-title">All Jobs</h5>
-                              <p class="card-text"></p>
-                              <a href="job_page.html" class="btn btn-outline-dark">View Jobs Information</a>
-                            </div>
-                          </div>
-                    </div>
-    
                 </div>
-
-
-
-
-            </main>
         </div>
+        </main>
+    </div>
     </div>
 
-    <script type="module" src="static/script.js"></script>
 
-    
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -212,7 +196,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
         integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
         crossorigin="anonymous"></script>
-    
+
+    <script type="module" src="../static/form.js"></script>
+    <script type="module" src="../static/add.js"></script>
+
+
 </body>
 
 </html>

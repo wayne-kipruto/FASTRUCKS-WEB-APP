@@ -8,11 +8,11 @@ import {
 
 import {
   getFirestore, collection, onSnapshot,
-  addDoc, deleteDoc, doc,getDoc,setDoc,
-  query,where,orderBy
+  addDoc, deleteDoc, doc, getDoc, getDocs, setDoc,
+  query, where, orderBy
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 
-import {getStorage,ref as sRef,uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js"
+import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js"
 
 
 
@@ -32,7 +32,7 @@ const auth = getAuth(app);
 const db = getFirestore();
 
 //Storage 
-var files =[];
+var files = [];
 var reader = new FileReader();
 
 var namebox = document.getElementById('namebox');
@@ -45,97 +45,93 @@ var downbtn = document.getElementById('downbtn');
 
 
 var input = document.createElement('input');
-input.type='file';
+input.type = 'file';
 
-input.onchange = e =>{
+input.onchange = e => {
   files = e.target.files;
 
   var extension = GetFileExtension(files[0]);
   var name = GetFileName(files[0]);
 
-  namebox.value=name;
-  extlab.innerHTML=extension;
+  namebox.value = name;
+  extlab.innerHTML = extension;
 
   reader.readAsDataURL(files[0]);
 
 }
 
-reader.onload = function(){
-  myimg.src =reader.result;
+reader.onload = function () {
+  myimg.src = reader.result;
 }
 
 //Selection Image
-selbtn.onclick = function(){
+selbtn.onclick = function () {
   input.click();
 }
-function GetFileExtension(file){
+function GetFileExtension(file) {
   var temp = file.name.split('.');
-  var ext = temp.slice((temp.length-1),(temp.length));
-  return '.' + ext[0]; 
+  var ext = temp.slice((temp.length - 1), (temp.length));
+  return '.' + ext[0];
 }
-function GetFileName(file){
-  var temp =file.name.split('.');
-  var fname = temp.slice(0,-1).join('.');
+function GetFileName(file) {
+  var temp = file.name.split('.');
+  var fname = temp.slice(0, -1).join('.');
   return fname;
 }
 
 //Upload Image 
 
-async function UploadImage(){
+async function UploadImage() {
   var ImgToUpload = files[0];
-  var ImgName =namebox.value + extlab.innerHTML;
+  var ImgName = namebox.value + extlab.innerHTML;
   const metadata = {
     contentType: ImgToUpload.type
   }
 
-  const storage =getStorage();
-  const storageRef = sRef(storage,"Images/"+ImgName);
+  const storage = getStorage();
+  const storageRef = sRef(storage, "Images/" + ImgName);
 
-  const UploadTask=uploadBytesResumable(storageRef,ImgToUpload,metadata);
+  const UploadTask = uploadBytesResumable(storageRef, ImgToUpload, metadata);
 
-  UploadTask.on('state-changed',(snapshot)=>{
+  UploadTask.on('state-changed', (snapshot) => {
     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    proglab.innerHTML = "Upload "+ progress + "%";
+    proglab.innerHTML = "Upload " + progress + "%";
   },
-  (error)=>{
-    alert('error:image not uploaded!');
-  },
-  ()=>{
-    getDownloadURL(UploadTask.snapshot.ref).then((downloadURL)=>{
-      saveURLToFirestore(downloadURL);
-    });
-  }
+    (error) => {
+      alert('error:image not uploaded!');
+    },
+    () => {
+      getDownloadURL(UploadTask.snapshot.ref).then((downloadURL) => {
+        saveURLToFirestore(downloadURL);
+      });
+    }
   );
 }
 
-async function saveURLToFirestore(url){
+async function saveURLToFirestore(url) {
   var name = namebox.value;
-  var ext =extlab.innerHTML;
+  var ext = extlab.innerHTML;
 
-  var ref = doc(db,'ImageLinks/'+ name);
+  var ref = doc(db, 'ImageLinks/' + name);
 
-  await setDoc(ref,{
-    ImageName: (name+ext),
+  await setDoc(ref, {
+    ImageName: (name + ext),
     ImageURL: url
   })
 }
 
-async function GetImageFromFirestore(){
+async function GetImageFromFirestore() {
   var name = namebox.value;
-  var ref = doc(db, "ImageLinks/"+name);
+  var ref = doc(db, "ImageLinks/" + name);
   const docSnap = await getDoc(ref);
 
-  if(docSnap.exists()){
-    myimg.src=docSnap.data().ImageURL;
+  if (docSnap.exists()) {
+    myimg.src = docSnap.data().ImageURL;
   }
 }
 
 upbtn.onclick = UploadImage;
-downbtn.onclick= GetImageFromFirestore;
-
-
-//------------------------------------------------------
-//Displaying data on tables 
+downbtn.onclick = GetImageFromFirestore;
 
 
 
@@ -147,106 +143,7 @@ downbtn.onclick= GetImageFromFirestore;
 //   console.log("Transporter Info :",doc.id, " => ", doc.data());
 // });
 
-//Collection reference
-const colRef = collection(db, 'transporters')
 
-//Queries 
-// const t = query(colRef, where("truck","==", "Isuzu"),orderBy('truck','asc'))
-
-//real-time collection data
-onSnapshot(colRef,(snapshot)=>{
-  let people = []
-  snapshot.docs.forEach((doc) => {
-  people.push({ ...doc.data(), id: doc.id })
-  })
-  console.log("TransporterInfo:",people)
-})
-
-//Adding transporters to firestore 
-const addPerson = document.querySelector('.add')
-addPerson.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  addDoc(colRef, {
-    name: addPerson.name.value,
-    age: addPerson.age.value,
-    mobile: addPerson.mobile.value,
-    truck: addPerson.truck.value
-  })
-    .then(() => {
-      addPerson.reset();
-
-    })
-
-});
-
-//Removing transporters from firestore 
-const deletePerson = document.querySelector('.delete')
-deletePerson.addEventListener('submit', (e) => {
-  e.preventDefault()
-
-  const documentRef = doc(db, 'transporters', deletePerson.uid.value)
-
-  deleteDoc(documentRef).then(() => {
-    deletePerson.reset()
-  })
-
-})
-
-///////////////////////////////Suppliers////////////////////////////////////
-
-// listing all data from Suppliers database 
-// const querySuppSnapshot = await getDocs(collection(db, "suppInfo"));
-
-// querySuppSnapshot.forEach((doc) => {
-
-//   console.log("Supplier Information:",doc.id, " => ", doc.data());
-// });
-
-//Collection reference
-const colSupRef = collection(db, 'suppInfo')
-
-//real-time collection data
-onSnapshot(colSupRef,(snapshot)=>{
-  let supplier = []
-  snapshot.docs.forEach((doc) => {
-  supplier.push({ ...doc.data(), id: doc.id })
-  })
-  console.log("SuppInfo:",supplier)
-})
-
-//Adding suppliers to firestore 
-const addSupplier = document.querySelector('.add')
-addSupplier.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  addDoc(colSupRef, {
-    name: addSupplier.supplierName.value,
-    age: addSupplier.supplierAge.value,
-    mobile: addSupplier.supplierMobile.value,
-    businessName: addSupplier.BusinessName.value,
-    businessDescription: addSupplier.BusinessDescription.value,
-    businessAddress:addSupplier.BusinessAddress.value
-  })
-    .then(() => {
-      addSupplier.reset();
-
-    })
-
-});
-
-//Removing suppliers from firestore 
-const deleteSupplier = document.querySelector('.delete')
-deleteSupplier.addEventListener('submit', (e) => {
-  e.preventDefault()
-
-  const suppRef = doc(db, 'suppInfo', deleteSupplier.uid.value)
-
-  deleteDoc(suppRef).then(() => {
-    deleteSupplier.reset()
-  })
-
-})
 
 document.getElementById("log-btn").addEventListener('click', function () {
   document.getElementById("register-div").style.display = "none";
