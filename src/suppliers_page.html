@@ -134,9 +134,7 @@
                         </li>
                         
                     </ul>
-
-                    <h6
-                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
                         <span>Saved reports</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle" class="align-text-bottom"></span>
@@ -174,57 +172,70 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <h5 style="text-align: center">ALL SUPPLIERS</h5>
-                            <table class="table table-dark">
+                            <table class="table table-danger ">
                                 <thead>
                                     <tr>
-                                        <th class="row-cols-auto">ID</th>
-                                        <th class="row-cols-auto">Name</th>
-                                        <th class="row-cols-auto">Business Info</th>
-                                        <th class="row-cols-auto">Phone Number</th>
+                                        <th class="row-cols-sm-2">ID</th>
+                                        <th class="row-cols-sm-2">Name</th>
+                                        <th class="row-cols-sm-2">Phone Number</th>
+                                        <th class="row-cols-sm-2">Business Name</th>
+                                        <th class="row-cols-sm-2">Business Address</th>
+                                        <th class="row-cols-sm-2">Business Description</th>
+                                        
                                         
                                     </tr>
                                 </thead>
                                 <tbody id="tbody1">
                                 </tbody>
                             </table>
-
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <form class="add">
+                                <h4>Add New Suppliers below</h4>
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="formGroupExampleInput" class="form-label">Name</label>
                                         <input type="text" class="form-control" placeholder="Name" id="formGroupName"
-                                            aria-label="Name" name="name">
+                                            aria-label="Name" name="supplierName">
                                     </div>
                                     <div class="col">
                                         <label for="formGroupExampleInput" class="form-label">Age</label>
                                         <input type="number" class="form-control" placeholder="Age" id="formGroupAge"
-                                            aria-label="Age" name="age">
+                                            aria-label="Business Name" name="supplierAge">
                                     </div>
                                 </div>
                                 <br>
-
-
-                                <div class="col">
+                                <div class="col-9">
                                     <label for="formGroupExampleInput" class="form-label">Mobile Number</label>
                                     <input type="number" class="form-control" placeholder="Mobile" id="formGroupMobile"
-                                        aria-label="Mobile" name="mobile">
+                                        aria-label="Mobile" name="supplierMobile">
                                 </div>
-
                                 <br>
-                                <div class="mb-3">
-                                    <label for="formGroupExampleInput" class="form-label">Truck Information</label>
-                                    <input type="text" class="form-control" id="formGroupTruck"
-                                        placeholder="Truck Model" name="truck" required>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <label for="formGroupExampleInput" class="form-label">Business Name</label>
+                                        <input type="text" class="form-control" id="formGroupBusinessName"
+                                            placeholder="Business Name" name="BusinessName" required>
+                                    </div>
+                                    <br>
+                                    <div class="col-7">
+                                        <label for="formGroupExampleInput" class="form-label">Business Address</label>
+                                        <input type="text" class="form-control" id="formGroupBusinessAddress"
+                                            placeholder="Business Address" name="BusinessAddress" required>
+                                    </div>
                                 </div>
+                                <br>
+                                <div class="col">
+                                    <label for="formGroupExampleInput" class="form-label">Business Description</label>
+                                    <input type="text" class="form-control" id="formGroupBusinessDescription"
+                                        placeholder="Brief Description" name="BusinessDescription" required>
+                                        </div>
+                                <br>
                                 <button class="btn btn-success" id="btn-success">Add</button>
                             </form>
                             <br>
-
-
                             <form class="delete">
                                 <div>
                                     <input type="text" class="form-control" id="formGroupDelete" placeholder="Enter user UID"
@@ -233,8 +244,6 @@
                                     <button class="btn btn-danger" name="id">Remove</button>
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
                 </div>

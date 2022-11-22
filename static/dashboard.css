@@ -99,3 +99,13 @@ body {
  h4{
     font-size: 'Oswald', sans-serif;
 }
+.form-label{
+    font-weight: bold;
+    font-size: 16;
+}
+
+#img{
+    height: 200px;
+    width: 200px;
+    border: 2px solid black;
+}
